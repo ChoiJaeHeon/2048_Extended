@@ -1,5 +1,5 @@
 # 2023 - 2 KWU 모바일 프로그래밍 2차 팀 프로젝트
-<p>Android Studio 를 grid와 view를 활용한 2048 게임 구현하기</p>
+<p>Android Studio의 Grid와 View를 활용한 2048 게임 구현하기</p>
 
 </br>
 
