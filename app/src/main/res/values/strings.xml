@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">2048 Extended</string>
+    <string name="high_score">HIGH SCORE</string>
+    <string name="score">SCORE</string>
+    <string name="you_win">승리!</string>
+    <string name="game_over">패배...</string>
+    <string name="go_on">탭하여 계속하기</string>
+    <string name="info">정보</string>
+    <string name="reset">리셋</string>
+    <string name="continue_game">취소</string>
+    <string name="reset_dialog_title">게임 리셋</string>
+    <string name="reset_dialog_message">게임을 리셋할까요?</string>
+    <string name="darkmode">다크모드</string>
+    <string name="sound">효과음</string>
+    <string name="save">저장</string>
+    <string name="start">시작</string>
+    <string name="settings">설정</string>
+    <string name="exit">종료</string>
+    <string name="share">이 게임 공유하기</string>
+    <string name="instructions">2048을 만드세요!</string>
+    <string name="status_exception_error">%1$s (status %2$d). %3$s.</string>
+    <string name="mode_choose">게임모드를 선택하세요</string>
+</resources>
