@@ -12,7 +12,7 @@ import android.view.View;
 
 import java.util.ArrayList;
 
-/* MainView 클래스(중요)
+/* MainView 클래스
 수업시간에는 xml 레이아웃 파일을 이용해서 화면을 설계하고 xml을 java 코드로 조작하는 것을 배웠지만
 저희가 만들 2048게임은 xml을 거의 이용하지 않고 java 파일에서 직접 그릴 예정입니다.
 MainView클래스는 View 클래스를 상속하며, ondraw 메서드로 화면(canvas)을 직접 그리는 방식입니다.
@@ -278,75 +278,94 @@ public class MainView extends View {
     }
 
     // 셀 그리기(애니메이션도 구현, 처리)
+    // 이 부분이 중요합니다
+    // 이 부분이 중요합니다
+    // 이 부분이 중요합니다
     private void drawCells(Canvas canvas) {
+        // 텍스트 크기 설정
         paint.setTextSize(textSize);
         paint.setTextAlign(Paint.Align.CENTER);
-        // Outputting the individual cells
+        // 각 셀을 순회
         for (int xx = 0; xx < game.numSquaresX; xx++) {
             for (int yy = 0; yy < game.numSquaresY; yy++) {
+                // 현재 셀의 시작과 끝 좌표 계산
                 int sX = startingX + gridWidth + (cellSize + gridWidth) * xx;
                 int eX = sX + cellSize;
                 int sY = startingY + gridWidth + (cellSize + gridWidth) * yy;
                 int eY = sY + cellSize;
 
+                // 현재 셀의 tile 객체 가져오기
                 Tile currentTile = game.grid.getCellContent(xx, yy);
                 if (currentTile != null) {
-                    //Get and represent the value of the tile
+                    // 현재 타일의 값 및 그에 해당하는 비트맵 인덱스 구하기
                     int value = currentTile.getValue();
                     int index = log2(value);
 
-                    //Check for any active animations
+                    // 현재 셀에 대한 애니메이션 정보 가져오기
                     ArrayList<AnimationCell> aArray = game.aGrid.getAnimationCell(xx, yy);
                     boolean animated = false;
+
+                    // 애니메이션 정보를 역순으로 순회하며 처리
                     for (int i = aArray.size() - 1; i >= 0; i--) {
                         AnimationCell aCell = aArray.get(i);
-                        //If this animation is not active, skip it
+                        // 만약 해당 애니메이션이 활성화되어 있다면 animated를 true로 설정
                         if (aCell.getAnimationType() == MainGame.SPAWN_ANI) {
                             animated = true;
                         }
+                        // 만약 해당 애니메이션이 비활성화되어 있다면 다음으로 넘어감
                         if (!aCell.isActive()) {
                             continue;
                         }
 
+                        // 스폰 애니메이션 처리
                         if (aCell.getAnimationType() == MainGame.SPAWN_ANI) { // Spawning animation
                             double percentDone = aCell.getPercentageDone();
                             float textScaleSize = (float) (percentDone);
                             paint.setTextSize(textSize * textScaleSize);
 
+                            // 애니메이션이 진행될수록 텍스트 크기 및 셀 크기 조절하여 그림
                             float cellScaleSize = cellSize / 2 * (1 - textScaleSize);
                             bitmapCell[index].setBounds((int) (sX + cellScaleSize), (int) (sY + cellScaleSize), (int) (eX - cellScaleSize), (int) (eY - cellScaleSize));
                             bitmapCell[index].draw(canvas);
-                        } else if (aCell.getAnimationType() == MainGame.MERGE_ANI) { // Merging Animation
+                        }
+                        // 머지 애니메이션 처리
+                            else if (aCell.getAnimationType() == MainGame.MERGE_ANI) { // Merging Animation
                             double percentDone = aCell.getPercentageDone();
                             float textScaleSize = (float) (1 + INITIAL_VELOCITY * percentDone
                                     + MERGING_ACCELERATION * percentDone * percentDone / 2);
+                            // 애니메이션이 진행될수록 텍스트 크기 및 셀 크기 조절하여 그림
                             paint.setTextSize(textSize * textScaleSize);
-
                             float cellScaleSize = cellSize / 2 * (1 - textScaleSize);
                             bitmapCell[index].setBounds((int) (sX + cellScaleSize), (int) (sY + cellScaleSize), (int) (eX - cellScaleSize), (int) (eY - cellScaleSize));
                             bitmapCell[index].draw(canvas);
-                        } else if (aCell.getAnimationType() == MainGame.MOVE_ANI) {  // Moving animation
+                        }
+                        // 무브 애니메이션 처리
+                            else if (aCell.getAnimationType() == MainGame.MOVE_ANI) {  // Moving animation
                             double percentDone = aCell.getPercentageDone();
                             int tempIndex = index;
+                            // 머지 애니메이션이 있을 경우 인덱스 조절
                             if (aArray.size() >= 2) {
                                 tempIndex = tempIndex - 1;
                             }
 
+                            // 이전 위치와 현재 위치를 기반으로 이동 거리 계산
                             int previousX = aCell.extras[0];
                             int previousY = aCell.extras[1];
                             int currentX = currentTile.getX();
                             int currentY = currentTile.getY();
                             int dX = (int) ((currentX - previousX) * (cellSize + gridWidth) * (percentDone - 1) * 1.0);
                             int dY = (int) ((currentY - previousY) * (cellSize + gridWidth) * (percentDone - 1) * 1.0);
+                            // 이동 거리를 기반으로 비트맵 위치 설정하여 그림
                             try{
                                 bitmapCell[tempIndex].setBounds(sX + dX, sY + dY, eX + dX, eY + dY);
                                 bitmapCell[tempIndex].draw(canvas);}
                             catch(NullPointerException e){Log.i("MainView",e + " : at 348");}
                         }
+                        // 애니메이션이 활성화되었음을 표시
                         animated = true;
                     }
 
-                    // 활성화 애니메이션 없으면 그냥 그림
+                    // 활성화된 애니메이션이 없을 경우 그냥 셀을 그림
                     if (!animated) {
                         bitmapCell[index].setBounds(sX, sY, eX, eY);
                         bitmapCell[index].draw(canvas);

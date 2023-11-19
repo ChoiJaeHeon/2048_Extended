@@ -65,13 +65,13 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    // 키다운 이벤트 처리
+    // 키보드 이벤트 처리
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {
-        if (keyCode == KeyEvent.KEYCODE_MENU)
+        if (keyCode == KeyEvent.KEYCODE_MENU) // 이건 사실 의미없음
             return true;
-        else if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN)
+        else if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) // 아래 위 왼 오
         {
             view.game.move(2);
             return true;
@@ -102,6 +102,13 @@ public class MainActivity extends AppCompatActivity
         save();
         super.onSaveInstanceState(savedInstanceState);
     }
+    // 이 아래는 사실 사용하지 않는 기능이라 안보셔도 됩니다.
+    // 이 아래는 사실 사용하지 않는 기능이라 안보셔도 됩니다.
+    // 이 아래는 사실 사용하지 않는 기능이라 안보셔도 됩니다.
+    // 이 아래는 사실 사용하지 않는 기능이라 안보셔도 됩니다.
+    // 이 아래는 사실 사용하지 않는 기능이라 안보셔도 됩니다.
+    // 이 아래는 사실 사용하지 않는 기능이라 안보셔도 됩니다.
+    // 이 아래는 사실 사용하지 않는 기능이라 안보셔도 됩니다.
 
     // 일시 정지
     protected void onPause()
