@@ -48,6 +48,7 @@ public class MainView extends View {
     public int sYIcons;
     public int sXNewGame;
     public int sXUndo;
+    public int sXRank;
     public int iconSize;
 
     //기타
@@ -255,6 +256,24 @@ public class MainView extends View {
         );
     }
 
+    private void drawRankButton(Canvas canvas) {
+        drawDrawable(canvas,
+                backgroundRectangle,
+                sXRank,
+                sYIcons, sXRank + iconSize,
+                sYIcons + iconSize
+        );
+
+        // 아이콘 이미지를 사용하거나 적절한 Drawable 리소스를 사용하여 버튼을 그립니다.
+        drawDrawable(canvas,
+                getResources().getDrawable(R.drawable.ic_action_ranking),
+                sXRank + iconPaddingSize,
+                sYIcons + iconPaddingSize,
+                sXRank + iconSize - iconPaddingSize,
+                sYIcons + iconSize - iconPaddingSize
+        );
+    }
+
     // 배경 그리기
     private void drawBackground(Canvas canvas) {
         drawDrawable(canvas, backgroundRectangle, startingX, startingY, endingX, endingY);
@@ -446,6 +465,7 @@ public class MainView extends View {
         Canvas canvas = new Canvas(background);
         drawResetButton(canvas, false);
         drawUndoButton(canvas);
+        drawRankButton(canvas);
         drawBackground(canvas);
         drawBackgroundGrid(canvas);
     }
@@ -582,6 +602,7 @@ public class MainView extends View {
         sYIcons = (startingY + eYAll) / 2 - iconSize / 2;
         sXNewGame = (endingX - iconSize);
         sXUndo = sXNewGame - iconSize * 3 / 2 - iconPaddingSize;
+        sXRank = sXUndo - iconSize * 3 / 2 - iconPaddingSize;
         resyncTime();
     }
 

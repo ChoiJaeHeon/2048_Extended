@@ -16,8 +16,12 @@
     <string name="start">시작</string>
     <string name="settings">설정</string>
     <string name="exit">종료</string>
+    <string name="rank">랭킹</string>
     <string name="share">이 게임 공유하기</string>
     <string name="instructions">2048을 만드세요!</string>
     <string name="status_exception_error">%1$s (status %2$d). %3$s.</string>
     <string name="mode_choose">게임모드를 선택하세요</string>
+    <string name="rank_dialog_insert">등록</string>
+    <string name="rank_dialog_title">랭킹</string>
+    <string name="rank_dialog_message">랭킹에 등록할 닉네임을 입력해주세요.</string>
 </resources>

@@ -38,10 +38,12 @@ public class MainMenu extends AppCompatActivity {
         Button startButton = findViewById(R.id.Start);
         Button exitButton = findViewById(R.id.Exit);
         Button shareButton = findViewById(R.id.share);
+        Button rankButton = findViewById(R.id.Rank);
 
         startButton.setOnClickListener(ButtonClickListener);
         exitButton.setOnClickListener(ButtonClickListener);
         shareButton.setOnClickListener(ButtonClickListener);
+        rankButton.setOnClickListener(ButtonClickListener);
 
     }
 
@@ -58,6 +60,10 @@ public class MainMenu extends AppCompatActivity {
                 case R.id.Exit:
                     ActivityCompat.finishAffinity(MainMenu.this);
                     System.exit(0);
+                    break;
+                case R.id.Rank:
+                    mIsMainMenu = false;
+                    startActivity(new Intent(MainMenu.this, RankingActivity.class));
                     break;
                 case R.id.share: // 메시지와 플레이 스토어 링크를 공유할수 있음
                     Intent shareIntent = new Intent(Intent.ACTION_SEND);

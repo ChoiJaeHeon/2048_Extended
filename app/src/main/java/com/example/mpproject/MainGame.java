@@ -35,6 +35,9 @@ public class MainGame {
     private static final int GAME_WIN = 1;
     private static final int GAME_LOST = -1;
     private static final int GAME_NORMAL = 0;
+
+    static long enrollScore;
+
     int gameMode = MainMenu.mGameMode;
     int gameState = GAME_NORMAL;
     int lastGameState = GAME_NORMAL;
@@ -44,6 +47,8 @@ public class MainGame {
     private static final int GAME_ENDLESS_WON = 3;
     private static final String FIRST_RUN = "first run";
     private static int endingMaxValue;
+
+
 
     // 내부 변수
     final int numSquaresX = 4;
@@ -238,6 +243,7 @@ public class MainGame {
                         // 점수 업데이트
                         score = score + merged.getValue();
                         highScore = Math.max(score, highScore);
+                        enrollScore = highScore;
 
                         // 2048 만들었으면
                         if (merged.getValue() >= winValue() && !gameWon()) {

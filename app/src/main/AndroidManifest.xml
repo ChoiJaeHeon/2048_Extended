@@ -28,6 +28,9 @@
         <activity
             android:name=".ModeSelect"
             android:theme="@style/FullScreenTheme"></activity>
+        <activity
+            android:name=".RankingActivity"
+            android:theme="@style/FullScreenTheme"></activity>
     </application>
 
 </manifest>

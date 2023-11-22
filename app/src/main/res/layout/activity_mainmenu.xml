@@ -12,8 +12,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="100sp"
+        android:layout_marginBottom="50sp"
         android:text="@string/start" />
+
+    <Button
+        android:id="@+id/Rank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="50sp"
+        android:text="@string/rank" />
 
     <Button
         android:id="@+id/Exit"
